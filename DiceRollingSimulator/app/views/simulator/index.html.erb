@@ -1,0 +1,32 @@
+<h1>Dice Rolling Simulator</h1>
+
+<%= form_with url: roll_simulator_path, method: :post, remote: true do |form| %>
+<div id="dice-container">
+	<div class="die-input">
+		<%= form.label :dice, "Enter sides for Die #1:" %>
+		<%= text_field_tag "dice[]", 6 %>
+	</div>
+</div>
+
+<br>
+<button type="button" id="add-die">Add Another Die</button>
+<br><br>
+<%= form.submit "Roll the Dice" %>
+<% end %>
+
+<% if flash[:error] %>
+<p style="color: red;"><%= flash[:error] %></p>
+<% end %>
+
+<script>
+	document.getElementById("add-die").addEventListener("click", function() {
+		var diceContainer = document.getElementById("dice-container");
+		var dieCount = diceContainer.getElementsByClassName("die-input").length + 1;
+		
+		var newDieInput = document.createElement("div");
+		newDieInput.className = "die-input";
+		newDieInput.innerHTML = `<label>Enter sides for Die #${dieCount}:</label> <input type="text" name="dice[]" value="6">`;
+		
+		diceContainer.appendChild(newDieInput);
+	});
+</script>

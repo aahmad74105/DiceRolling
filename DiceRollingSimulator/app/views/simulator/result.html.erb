@@ -1,0 +1,10 @@
+<%# app/views/simulator/result.html.erb %>
+<h1>Roll Results</h1>
+
+<p>You rolled dice with the following sides: <%= @result.description %></p>
+
+<p>Individual rolls: <%= @result.individual_rolls.join(', ') %></p>
+
+<p>Total of all rolls: <%= @result.total %></p>
+
+<%= link_to "Roll Again", "/" %>

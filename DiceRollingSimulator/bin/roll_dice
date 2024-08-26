@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+puts "Welcome to the Dice Rolling Simulator!"
+print "How many dice would you like to roll? "
+dice_count = gets.chomp.to_i
+
+dice = []
+
+dice_count.times do |i|
+  print "Enter the number of sides for die ##{i + 1}: "
+  sides = gets.chomp.to_i
+  dice << Simulator::Die.new(sides)
+end
+
+result = Simulator::RollResult.new(dice)
+puts "You rolled dice with the following sides: #{result.description}"
+puts "Individual rolls: #{result.individual_rolls.join(', ')}"
+puts "Total of all rolls: #{result.total}"

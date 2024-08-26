@@ -1,0 +1,40 @@
+<!-- app/views/dice_rolls/new.html.erb -->
+<h1>Dice Rolling Simulator</h1>
+
+<%= form_with url: dice_rolls_path, method: :post, local: true do |form| %>
+  <div>
+    <label for="dice_count">Number of Dice:</label>
+    <%= form.number_field :dice_count, id: 'dice_count', min: 1, value: 1 %>
+  </div>
+
+  <div id="dice-sides">
+    <label>Number of Sides for Each Die:</label>
+    <div>
+      <input type="number" name="dice_sides[]" min="1" value="6">
+    </div>
+  </div>
+
+  <%= form.submit "Roll Dice" %>
+<% end %>
+
+<script>
+  document.getElementById('dice_count').addEventListener('change', function() {
+    const diceCount = this.value;
+    const sidesDiv = document.getElementById('dice-sides');
+    
+    // Clear previous inputs
+    sidesDiv.innerHTML = '<label>Number of Sides for Each Die:</label>';
+    
+    // Add new inputs based on dice count
+    for (let i = 0; i < diceCount; i++) {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.name = 'dice_sides[]';
+      input.min = 1;
+      input.value = 6;
+      input.style.marginBottom = '10px';
+      sidesDiv.appendChild(input);
+      sidesDiv.appendChild(document.createElement('br'));
+    }
+  });
+</script>

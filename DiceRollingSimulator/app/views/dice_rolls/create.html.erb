@@ -1,0 +1,15 @@
+<!-- app/views/dice_rolls/create.html.erb -->
+<h1>Dice Roll Results</h1>
+
+<p><strong>You rolled dice with the following sides:</strong> <%= @result.description %></p>
+
+<p><strong>Individual rolls:</strong></p>
+<ul>
+  <% @result.individual_rolls.each_with_index do |roll, index| %>
+    <li>Die <%= index + 1 %> (sides <%= @result.description.split(', ')[index] %>): <%= roll %></li>
+  <% end %>
+</ul>
+
+<p><strong>Total of all rolls:</strong> <%= @result.total %></p>
+
+<%= link_to 'Roll Again', new_dice_roll_path, class: 'btn btn-primary' %>
